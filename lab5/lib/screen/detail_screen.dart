@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
 import '../models/movie.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class MovieDetailScreen extends StatelessWidget {
   final Movie movie;
 
 
   const MovieDetailScreen({super.key, required this.movie});
+
+  Future<void> _openTrailer(String url) async {
+    final uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(
+        uri,
+        mode: LaunchMode.externalApplication,
+      );
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -74,18 +85,21 @@ class MovieDetailScreen extends StatelessWidget {
 
                   // 5. Trailers List (Demo UI) [cite: 83]
                   const Text("Trailers", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-                  ListTile(
-                    leading: const Icon(Icons.play_circle_fill, size: 40),
-                    title: const Text("Official Trailer"),
-                    subtitle: const Text("2:30"),
-                    onTap: () {},
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    itemCount: movie.trailers.length,
+                    itemBuilder: (context, index) {
+                      final trailer = movie.trailers[index];
+                      return ListTile(
+                        leading: const Icon(Icons.play_circle_fill, color: Colors.red, size: 40),
+                        title: Text(trailer.title),
+                        subtitle: Text(trailer.duration),
+                        onTap: () => _openTrailer(trailer.videoUrl), // 👈 CHẠY Ở ĐÂY
+                      );
+                    },
                   ),
-                  ListTile(
-                    leading: const Icon(Icons.play_circle_fill, size: 40),
-                    title: const Text("Teaser"),
-                    subtitle: const Text("1:05"),
-                    onTap: () {},
-                  ),
+
                 ],
               ),
             ),
