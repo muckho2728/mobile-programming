@@ -18,7 +18,7 @@ class TasklyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Lab12-VuTienDat',
+      title: 'Lab12-Le Thi Hai Ha',
       debugShowCheckedModeBanner: false, // ✅ Ex 12.4: Tắt banner DEBUG
       theme: ThemeData(
         colorSchemeSeed: Colors.deepPurple,

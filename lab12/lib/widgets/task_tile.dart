@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/task.dart';
 
+//
 // Ex 12.1: Widget tách riêng, chỉ rebuild khi task của nó thay đổi
 class TaskTile extends StatelessWidget {
   final Task task;

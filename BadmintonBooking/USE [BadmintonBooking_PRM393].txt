@@ -1,0 +1,81 @@
+USE [BadmintonBooking_PRM393]
+GO
+
+-----------------------------
+-- 1. CATEGORIES
+-----------------------------
+INSERT INTO Categories (CategoryName) VALUES
+(N'Vợt cầu lông'),
+(N'Giày cầu lông'),
+(N'Quần áo thể thao'),
+(N'Phụ kiện'),
+(N'Cầu lông'),
+(N'Túi đựng vợt'),
+(N'Băng cổ tay'),
+(N'Bình nước'),
+(N'Băng đầu'),
+(N'Khác');
+GO
+
+-----------------------------
+-- 2. USERS
+-----------------------------
+INSERT INTO Users (FullName, Email, PasswordHash, PhoneNumber, Role) VALUES
+(N'Nguyễn Văn Anh','anhnv@gmail.com','123','0900000001','Customer'),
+(N'Trần Văn Bình','binhtv@gmail.com','123','0900000002','Customer'),
+(N'Lê Văn Cương','cuonglv@gmail.com','123','0900000003','Customer'),
+(N'Phạm Văn Đức','ducpv@gmail.com','123','0900000004','Customer'),
+(N'Đình Phong Nguyễn','dinhphon2728@gmail.com','Admin@123','0900000005','Admin'),
+(N'Nguyễn Văn Sơn','sonvn@gmail.com','123','0900000006','Customer'),
+(N'Nguyễn Văn Test','testnv@gmail.com','123','0900000007','Customer');
+GO
+
+-----------------------------
+-- 3. COURTS
+-----------------------------
+INSERT INTO Courts (CourtName, Description) VALUES
+(N'Sân 1',N'Sân tiêu chuẩn'),
+(N'Sân 2',N'Sân VIP'),
+(N'Sân 3',N'Sân ngoài trời'),
+(N'Sân 4',N'Sân trong nhà'),
+(N'Sân 5',N'Sân cao cấp');
+GO
+
+-----------------------------
+-- 4. SERVICES
+-----------------------------
+INSERT INTO Services (ServiceName, Price, Unit) VALUES
+(N'Thuê vợt',50000,N'giờ'),
+(N'Nước suối',10000,N'chai'),
+(N'Khăn lạnh',5000,N'cái'),
+(N'Huấn luyện viên',200000,N'giờ'),
+(N'Giữ xe',5000,N'lượt');
+(N'Thuê giày', 40000, N'giờ');
+(N'Áo thi đấu', 80000, N'cái');
+(N'Combo nước + khăn', 12000, N'combo');
+(N'Bóng cầu', 20000, N'cái');
+GO
+
+-----------------------------
+-- 5. PRODUCTS (JOIN CATEGORY NAME)
+-----------------------------
+INSERT INTO Products (CategoryId, ProductName, Price, StockQuantity)
+SELECT c.Id, N'Yonex Astrox 99', 3500000, 10
+FROM Categories c WHERE c.CategoryName = N'Vợt cầu lông';
+
+INSERT INTO Products (CategoryId, ProductName, Price, StockQuantity)
+SELECT c.Id, N'Yonex SHB 65Z3', 2200000, 10
+FROM Categories c WHERE c.CategoryName = N'Giày cầu lông';
+
+INSERT INTO Products (CategoryId, ProductName, Price, StockQuantity)
+SELECT c.Id, N'Áo cầu lông Yonex', 400000, 20
+FROM Categories c WHERE c.CategoryName = N'Quần áo thể thao';
+
+INSERT INTO Products (CategoryId, ProductName, Price, StockQuantity)
+SELECT c.Id, N'Cầu Yonex AS50', 500000, 30
+FROM Categories c WHERE c.CategoryName = N'Cầu lông';
+
+INSERT INTO Products (CategoryId, ProductName, Price, StockQuantity)
+SELECT c.Id, N'Quấn cán vợt', 50000, 50
+FROM Categories c WHERE c.CategoryName = N'Phụ kiện';
+GO

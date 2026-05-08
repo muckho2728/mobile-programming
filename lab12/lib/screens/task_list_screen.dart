@@ -80,7 +80,7 @@ class _TaskListScreenState extends State<TaskListScreen> {
         ),
         title: Text(
           //Hiện số lượng đang chọn trên AppBar
-          hasSelection ? '${_selectedIds.length} selected' : 'Lab12-VuTienDat',
+          hasSelection ? '${_selectedIds.length} selected' : 'Lab12-LeThiHaiHa',
         ),
         actions: [
           if (hasSelection) ...[
